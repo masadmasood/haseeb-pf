@@ -2,7 +2,6 @@
 
 import { Download, ArrowUpRight, Monitor, Palette, Smartphone, Server, Database, Cpu, Wrench, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -216,13 +215,11 @@ export default function AboutPage() {
             </div>
 
             <Button
-              asChild
               className="w-full rounded-full bg-linear-to-r from-primary to-primary/70 text-background shadow-lg py-4"
               size="lg"
+              type="button"
             >
-              <Link href="#" aria-disabled="true" onClick={(e) => e.preventDefault()}>
-                <Download className="mr-2 h-4 w-4" /> Download PDF
-              </Link>
+              <Download className="mr-2 h-4 w-4" /> Download PDF
             </Button>
           </aside>
 
@@ -235,13 +232,11 @@ export default function AboutPage() {
               Full Stack Developer
             </p>
             <Button
-              asChild
               className="rounded-full w-full sm:w-auto shadow-md"
               size="lg"
+              type="button"
             >
-              <Link href="#" aria-disabled="true" onClick={(e) => e.preventDefault()}>
-                <Download className="mr-2 h-4 w-4" /> Download PDF
-              </Link>
+              <Download className="mr-2 h-4 w-4" /> Download PDF
             </Button>
           </div>
 

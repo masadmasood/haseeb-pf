@@ -112,15 +112,13 @@ export default function ResumePage() {
               </h1>
             </div>
             <Button
-              asChild
               variant="outline"
               size="lg"
               className="rounded-full border-border/70 bg-background/40 backdrop-blur-sm"
+              type="button"
             >
-              <a href="#" aria-disabled="true" onClick={(e) => e.preventDefault()}>
-                <Download className="mr-2 h-4 w-4" />
-                Download PDF
-              </a>
+              <Download className="mr-2 h-4 w-4" />
+              Download PDF
             </Button>
           </div>
 
