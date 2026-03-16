@@ -1,4 +1,4 @@
-# Asad Masood Portfolio
+# HASEEB RAZA Portfolio
 
 Modern portfolio built with Next.js 16, React 19, TypeScript, and Tailwind CSS v4.
 
