@@ -15,12 +15,14 @@ export function generatePersonSchema() {
     knowsAbout: [
       "React",
       "Next.js",
+      "React Native",
       "TypeScript",
       "JavaScript",
-      "Frontend Development",
-      "Web Development",
-      "UI/UX Development",
-      "Performance Optimization",
+      "Node.js",
+      "Python",
+      "Full Stack Development",
+      "Mobile App Development",
+      "AI Integration",
     ],
   };
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
@@ -6,7 +7,7 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden py-24 md:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-primary/5 via-transparent to-transparent" />
 
       <div className="container relative mx-auto px-6">
         <div className="mb-20 flex flex-col items-center text-center">
@@ -23,13 +24,13 @@ export function Footer() {
             Have a project in mind? I&apos;d love to hear about it.
           </p>
 
-          <a
-            href={`mailto:${siteConfig.email}`}
+          <Link
+            href="/contact"
             className="group inline-flex items-center gap-3 rounded-full bg-foreground px-8 py-4 font-medium text-background transition-all duration-300 hover:bg-primary"
           >
             Get in touch
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </a>
+          </Link>
         </div>
 
         <div className="border-t border-border/40 pt-8">
@@ -45,7 +46,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="px-4 py-2 text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
-                GitHub
+                Upwork
               </a>
               <span className="text-border">·</span>
               <a
@@ -54,14 +55,16 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="px-4 py-2 text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
-                LinkedIn
+                Fiverr
               </a>
               <span className="text-border">·</span>
               <a
-                href={`mailto:${siteConfig.email}`}
+                href={siteConfig.socials.peopleperhour}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-4 py-2 text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
-                Email
+                PeoplePerHour
               </a>
             </div>
           </div>

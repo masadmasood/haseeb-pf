@@ -27,38 +27,38 @@ export type FAQ = {
 export const services: Service[] = [
   {
     icon: null, // supplied by page or component
-    title: "Frontend Development",
+    title: "Full Stack Development",
     description:
-      "Modern web application delivery with React, Next.js, and TypeScript. Built for scale, maintainability, and strong user experience.",
+      "End-to-end web application development with Next.js, React, TypeScript, and Node.js. Built for scale, performance, and clean architecture.",
     features: [
-      "React and Next.js applications",
+      "Next.js and React web applications",
+      "Node.js backend and API development",
       "TypeScript implementation",
-      "Responsive UI systems",
-      "Component library development",
+      "Responsive and performant UI systems",
     ],
   },
   {
     icon: null,
-    title: "Performance Optimization",
+    title: "Mobile App Development",
     description:
-      "Improving speed and UX through smarter loading strategies, leaner bundles, and pragmatic frontend optimization.",
+      "Cross-platform iOS and Android applications using React Native, delivering native-quality experiences from a single codebase.",
     features: [
-      "Core Web Vitals optimization",
-      "Bundle size reduction",
-      "Code splitting & lazy loading",
-      "Performance audits",
+      "React Native iOS and Android apps",
+      "AI-powered mobile integrations",
+      "App Store and Google Play deployment",
+      "Performance optimization for mobile",
     ],
   },
   {
     icon: null,
-    title: "UI/UX Implementation",
+    title: "AI & Python Integration",
     description:
-      "Turning product designs into accessible, polished interfaces with reusable patterns and consistent behavior.",
+      "Integrating AI and machine learning capabilities into web and mobile applications using Python and modern AI SDKs.",
     features: [
-      "Design system implementation",
-      "Accessibility support",
-      "Animation & interactions",
-      "Cross-browser compatibility",
+      "AI feature integration",
+      "Python backend services",
+      "Machine learning workflows",
+      "API design and integration",
     ],
   },
 ];
@@ -84,28 +84,21 @@ export const engagementModels: EngagementModel[] = [
 export const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Discovery Call",
-    description: "We discuss your project goals, requirements, timeline, and budget.",
+    title: "Phase 1 – Planning & Initialization",
+    description:
+      "Define project goals, target audience, structure, navigation and content requirements.",
   },
   {
     number: "02",
-    title: "Proposal & Planning",
-    description: "I provide a detailed proposal with scope, timeline, and cost breakdown.",
+    title: "Phase 2 – Development",
+    description:
+      "Begin coding the project while sharing regular updates with the client.",
   },
   {
     number: "03",
-    title: "Development & Updates",
-    description: "Regular progress updates with demo links and opportunities for feedback.",
-  },
-  {
-    number: "04",
-    title: "Testing & Deployment",
-    description: "Comprehensive testing, optimization, and smooth deployment to production.",
-  },
-  {
-    number: "05",
-    title: "Handoff & Support",
-    description: "Complete documentation, knowledge transfer, and post-launch support.",
+    title: "Phase 3 – Deployment & Launch",
+    description:
+      "Deploy websites to servers or publish apps to mobile app stores.",
   },
 ];
 

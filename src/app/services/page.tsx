@@ -4,6 +4,7 @@ import EngagementModels from "@/components/services/EngagementModels";
 import ProcessTimeline from "@/components/services/ProcessTimeline";
 import FaqAccordion from "@/components/services/FaqAccordion";
 import { CTASection } from "@/components/cta-section";
+import { HeroSection } from "@/components/hero-section";
 import {
   services as rawServices,
   engagementModels,
@@ -16,23 +17,11 @@ const serviceIcons = [Code2, Rocket, Users];
 export default function ServicesPage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background selection:bg-primary/20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.14),transparent_55%)]" />
-
-      <section className="container relative z-10 mx-auto px-6 pb-24 pt-32 md:pt-44">
-        <div className="mx-auto max-w-5xl text-center">
-          <h1 className="mb-10 text-6xl font-medium tracking-tighter text-foreground md:text-8xl lg:text-[9rem] lg:leading-none">
-            Services
-          </h1>
-
-          <div className="flex flex-col items-center justify-center gap-6 text-lg font-light text-muted-foreground md:flex-row md:gap-10 md:text-xl">
-            <span>Frontend architecture</span>
-            <span className="hidden h-1 w-1 rounded-full bg-primary/50 md:inline" />
-            <span>Performance engineering</span>
-            <span className="hidden h-1 w-1 rounded-full bg-primary/50 md:inline" />
-            <span>UI implementation</span>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        label="Full Stack & Mobile Developer"
+        title="THE RIGHT FIT"
+        description="End-to-end web and mobile development — from architecture to deployment, built for real-world results."
+      />
 
       <section className="relative z-10 py-24 md:py-28">
         <div className="container mx-auto max-w-7xl px-6">

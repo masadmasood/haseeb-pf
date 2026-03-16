@@ -1,350 +1,485 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  ArrowRight,
-  Blocks,
-  BriefcaseBusiness,
-  Download,
-  Gauge,
-  Globe,
-  GraduationCap,
-  Mail,
-  Rocket,
-  ShieldCheck,
-  Sparkles,
-  TestTube2,
-  Workflow,
-} from "lucide-react";
+"use client";
+
+import { Download, ArrowUpRight, Monitor, Palette, Smartphone, Server, Database, Cpu, Wrench, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/site";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: `About - ${siteConfig.name} | ${siteConfig.title}`,
-  description:
-    "Experience, delivery approach, and modern frontend toolkit for product-focused React and Next.js work.",
-};
+// --- Data ---
 
-const quickStats = [
-  { label: "Experience", value: "2+ years" },
-  { label: "Projects delivered", value: "10+" },
-  { label: "Primary focus", value: "React, Next.js, TypeScript" },
-  { label: "Collaboration", value: "Remote, async-friendly" },
-];
-
-const strengths = [
+const skillCategories = [
   {
-    icon: Workflow,
-    title: "Product-minded architecture",
-    description:
-      "I structure frontend systems around clarity, scalable composition, and fast iteration instead of one-off pages.",
+    title: "Frontend",
+    icon: Monitor,
+    skills: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3"],
   },
   {
-    icon: Gauge,
-    title: "Performance by default",
-    description:
-      "I optimize bundle weight, loading sequences, and interaction cost early so performance does not become rework later.",
+    title: "Styling & UI",
+    icon: Palette,
+    skills: ["Tailwind CSS", "Framer Motion", "Sass", "shadcn/ui"],
   },
   {
-    icon: ShieldCheck,
-    title: "Accessible implementation",
-    description:
-      "I ship interfaces with strong semantics, focus states, and predictable interaction patterns that hold up in production.",
+    title: "Mobile",
+    icon: Smartphone,
+    skills: ["React Native", "Expo", "iOS", "Android"],
   },
   {
-    icon: Sparkles,
-    title: "Intentional polish",
-    description:
-      "Motion, spacing, and visual systems are used to support clarity and trust, not just decoration.",
-  },
-];
-
-const experience = [
-  {
-    period: "2024 - Present",
-    role: "Frontend Engineer",
-    company: "Independent product and client work",
-    summary:
-      "Building product interfaces, dashboards, and landing experiences with Next.js, React 19, TypeScript, and Tailwind CSS v4.",
-    wins: [
-      "Delivered responsive interfaces with stronger performance and cleaner component boundaries.",
-      "Translated product requirements into reusable UI systems instead of single-use screens.",
-      "Supported feature delivery, refinement, and frontend cleanup across active codebases.",
-    ],
+    title: "Backend",
+    icon: Server,
+    skills: ["Node.js", "Express.js", "REST APIs", "Python"],
   },
   {
-    period: "2023 - 2024",
-    role: "Frontend Developer",
-    company: "Agency and startup collaborations",
-    summary:
-      "Worked across fast-moving product environments, focusing on shipping polished UI, better maintainability, and reliable frontend behavior.",
-    wins: [
-      "Implemented modern design systems with a reusable component mindset.",
-      "Improved UI consistency and reduced duplication across multiple flows.",
-      "Partnered closely with design and product stakeholders to shorten feedback loops.",
-    ],
+    title: "Database & Cloud",
+    icon: Database,
+    skills: ["Firebase", "MongoDB", "Supabase", "Vercel"],
+  },
+  {
+    title: "AI & Integrations",
+    icon: Cpu,
+    skills: ["OpenAI API", "AI Integrations", "Webhooks", "Third-party APIs"],
+  },
+  {
+    title: "Tools & Workflow",
+    icon: Wrench,
+    skills: ["Git", "GitHub", "VS Code", "Figma", "Postman"],
   },
 ];
 
-const toolkit = [
+const experiences = [
   {
-    title: "Core stack",
-    icon: Blocks,
-    items: [
-      "Next.js 16",
-      "React 19",
-      "TypeScript",
-      "App Router",
-      "Server Components",
+    role: "Full Stack Developer",
+    company: "Freelance — Remote",
+    period: "2023 — Present",
+    description:
+      "Delivering web and mobile applications for international clients. End-to-end ownership from UI design to deployment.",
+    achievements: [
+      "Built and shipped production web apps using Next.js, React, and Tailwind CSS",
+      "Developed cross-platform mobile apps with React Native for iOS and Android",
+      "Integrated AI APIs and third-party services into client products",
     ],
+    technologies: ["Next.js", "React Native", "TypeScript", "Node.js"],
   },
   {
-    title: "UI and styling",
-    icon: Rocket,
-    items: [
-      "Tailwind CSS v4",
-      "Design systems",
-      "Lucide icons",
-      "shadcn-style primitives",
-      "GSAP for motion",
+    role: "Mobile App Developer",
+    company: "Upwork — Freelance",
+    period: "2022 — 2023",
+    description:
+      "Worked with international clients on Upwork to build and maintain mobile applications.",
+    achievements: [
+      "Built cross-platform apps with React Native delivered to App Store and Google Play",
+      "Collaborated with clients across different time zones and delivered on schedule",
+      "Maintained codebases and shipped feature updates post-launch",
     ],
+    technologies: ["React Native", "JavaScript", "Firebase", "Expo"],
   },
   {
-    title: "Quality and delivery",
-    icon: TestTube2,
-    items: [
-      "ESLint",
-      "Strict TypeScript",
-      "Performance audits",
-      "Responsive QA",
-      "Production handoff support",
+    role: "Software Engineering Intern",
+    company: "Software Engineering Internship",
+    period: "2021",
+    description:
+      "Gained hands-on experience building real product features during internship.",
+    achievements: [
+      "Implemented UI features and improved responsiveness across multiple screens",
+      "Worked within a team environment following engineering standards",
     ],
+    technologies: ["React", "JavaScript", "HTML", "CSS"],
   },
 ];
 
 const education = [
   {
-    title: "Continuous product engineering practice",
-    detail:
-      "Hands-on learning through shipping interfaces, reviewing real codebases, and modernizing existing frontend systems.",
+    degree: "Diploma of Associate Engineering — Information Technology",
+    institution: "DAE in IT",
+    period: "2020 — 2022",
+    description:
+      "Studied software development, networking, database systems, and engineering fundamentals. Built a strong technical foundation that directly supports full-stack and mobile development work.",
+    highlights: ["Software Development", "Database Systems", "Networking", "Engineering Fundamentals"],
   },
   {
-    title: "Frontend specialization",
-    detail:
-      "Focused on React ecosystems, scalable component architecture, and maintainable user interface implementation.",
+    degree: "Information Technology",
+    institution: "IT Program",
+    period: "Completed",
+    description:
+      "Core studies in IT covering programming, systems, and applied technology. Complementary to the DAE program with a focus on practical software and systems skills.",
+    highlights: ["Programming", "Systems", "Applied Technology"],
   },
 ];
 
+// --- Components ---
+
 export default function AboutPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState("introduction");
+
+  useEffect(() => {
+    const sections = document.querySelectorAll(".resume-section");
+    const animObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).style.opacity = "1";
+            (entry.target as HTMLElement).style.transform = "translateY(0)";
+            animObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    sections.forEach((section) => {
+      (section as HTMLElement).style.opacity = "0";
+      (section as HTMLElement).style.transform = "translateY(40px)";
+      (section as HTMLElement).style.transition =
+        "opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)";
+      animObserver.observe(section);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px" },
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      animObserver.disconnect();
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const y =
+        element.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <section className="relative overflow-hidden border-b border-border/40 pt-28 md:pt-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.18),transparent_55%)]" />
+    <div
+      ref={containerRef}
+      className="min-h-screen w-full overflow-x-hidden bg-background selection:bg-primary/20 font-sans"
+    >
+      {/* Background Decor — clipped so it never causes overflow */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[-10%] right-[-10%] w-[min(800px,100vw)] h-[min(800px,100vw)] bg-primary/3 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[min(600px,80vw)] h-[min(600px,80vw)] bg-blue-500/5 rounded-full blur-[100px]" />
+      </div>
 
-        <div className="container relative mx-auto grid gap-12 px-6 pb-20 lg:grid-cols-[260px_minmax(0,1fr)] lg:pb-28">
-          <aside className="hidden lg:block">
-            <div className="sticky top-28 rounded-3xl border border-border/50 bg-surface/40 p-6 backdrop-blur">
-              <p className="mb-6 text-xs uppercase tracking-[0.24em] text-muted-foreground">
-                Overview
-              </p>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-10 xl:gap-20">
 
-              <nav className="space-y-2">
+          {/* Sticky Sidebar (Desktop) */}
+          <aside className="hidden lg:flex flex-col py-24 h-screen sticky top-0 justify-between">
+            <div className="space-y-6">
+              <div className="p-6 rounded-2xl bg-linear-to-b from-surface/8 to-transparent">
+                <h1 className="text-4xl font-bold tracking-tight mb-1 text-foreground">
+                  About Me
+                </h1>
+                <p className="text-muted-foreground">Professional overview</p>
+              </div>
+
+              <nav className="flex flex-col w-full space-y-3 mt-6">
                 {[
-                  ["Summary", "#summary"],
-                  ["Experience", "#experience"],
-                  ["Toolkit", "#toolkit"],
-                  ["Education", "#education"],
-                ].map(([label, href]) => (
-                  <a
-                    key={href}
-                    href={href}
-                    className="flex items-center justify-between rounded-full px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-background/70 hover:text-foreground"
+                  { label: "Introduction", id: "introduction" },
+                  { label: "Experience", id: "experience" },
+                  { label: "Skills", id: "skills" },
+                  { label: "Education", id: "education" },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={cn(
+                      "group flex items-center justify-between py-3 px-6 rounded-full text-sm font-medium transition-all duration-300 w-full text-left",
+                      activeSection === item.id
+                        ? "bg-primary/10 text-primary shadow-md"
+                        : "text-muted-foreground hover:bg-surface-secondary/20 hover:text-foreground",
+                    )}
                   >
-                    <span>{label}</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
+                    <span className="tracking-widest uppercase">{item.label}</span>
+                    {activeSection === item.id && (
+                      <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                    )}
+                  </button>
                 ))}
               </nav>
             </div>
+
+            <Button
+              asChild
+              className="w-full rounded-full bg-linear-to-r from-primary to-primary/70 text-background shadow-lg py-4"
+              size="lg"
+            >
+              <Link href="#" aria-disabled="true" onClick={(e) => e.preventDefault()}>
+                <Download className="mr-2 h-4 w-4" /> Download PDF
+              </Link>
+            </Button>
           </aside>
 
-          <div className="space-y-20">
-            <div id="summary" className="max-w-4xl space-y-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs uppercase tracking-[0.24em] text-primary">
-                <Globe className="h-3.5 w-3.5" />
-                {siteConfig.availability}
-              </span>
+          {/* Mobile Header */}
+          <div className="lg:hidden pt-32 pb-8 border-b border-border/40">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+              About Me
+            </h1>
+            <p className="text-lg text-muted-foreground mb-8">
+              Full Stack Developer
+            </p>
+            <Button
+              asChild
+              className="rounded-full w-full sm:w-auto shadow-md"
+              size="lg"
+            >
+              <Link href="#" aria-disabled="true" onClick={(e) => e.preventDefault()}>
+                <Download className="mr-2 h-4 w-4" /> Download PDF
+              </Link>
+            </Button>
+          </div>
 
-              <div className="space-y-6">
-                <h1 className="max-w-4xl text-5xl font-bold tracking-tight md:text-7xl lg:text-[5.5rem] lg:leading-none">
-                  Building frontend systems that stay fast, clear, and maintainable.
-                </h1>
-                <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-2xl">
-                  I design and implement product interfaces with a strong bias toward
-                  structure, performance, and polish. The goal is simple: make teams
-                  faster without letting the codebase get heavier over time.
-                </p>
-              </div>
+          {/* Main Content */}
+          <main className="py-12 lg:py-24 space-y-28 min-w-0">
 
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Button asChild size="lg" className="rounded-full">
-                  <Link href="/resume.pdf" target="_blank" download>
-                    <Download className="h-4 w-4" />
-                    Download resume
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full">
-                  <Link href="/contact">
-                    <Mail className="h-4 w-4" />
-                    Start a conversation
-                  </Link>
-                </Button>
-              </div>
-            </div>
+            {/* ── Introduction ── */}
+            <section id="introduction" className="resume-section scroll-mt-32">
+              <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start mb-16">
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {quickStats.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-3xl border border-border/50 bg-surface/40 p-6 backdrop-blur"
-                >
-                  <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    {item.label}
+                {/* Text */}
+                <div className="space-y-10">
+                  <div className="space-y-5">
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-[0.95]">
+                      Developer. <br />
+                      <span className="text-muted-foreground/40">Builder.</span> <br />
+                      <span className="text-primary">Problem Solver.</span>
+                    </h2>
+                    <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
+                      I build accessible, pixel-perfect, and performant web and
+                      mobile experiences that bridge the gap between design and
+                      technology.
+                    </p>
+                  </div>
+
+                  <p className="font-light leading-relaxed text-muted-foreground/80 text-base sm:text-lg">
+                    With{" "}
+                    <span className="text-foreground font-medium">
+                      4+ years of hands-on experience
+                    </span>
+                    , I specialize in the React ecosystem — building scalable
+                    web apps and cross-platform mobile apps. I work with
+                    clients worldwide and take projects from idea to shipped
+                    product.
                   </p>
-                  <p className="text-xl font-semibold text-foreground">{item.value}</p>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border/40">
+                    <div>
+                      <span className="block text-4xl font-bold text-foreground mb-1">
+                        10+
+                      </span>
+                      <span className="text-xs font-mono text-muted-foreground uppercase tracking-[0.2em]">
+                        Projects Delivered
+                      </span>
+                    </div>
+                    <div>
+                      <span className="block text-4xl font-bold text-foreground mb-1">
+                        4+
+                      </span>
+                      <span className="text-xs font-mono text-muted-foreground uppercase tracking-[0.2em]">
+                        Years Experience
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
 
-            <section className="space-y-8">
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-[0.24em] text-primary">
-                  Core strengths
-                </p>
-                <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
-                  A delivery style built for modern product teams
-                </h2>
-              </div>
-
-              <div className="grid gap-5 md:grid-cols-2">
-                {strengths.map(({ icon: Icon, title, description }) => (
-                  <article
-                    key={title}
-                    className="rounded-3xl border border-border/50 bg-surface/30 p-6"
-                  >
-                    <Icon className="mb-5 h-9 w-9 text-primary" />
-                    <h3 className="mb-3 text-2xl font-semibold">{title}</h3>
-                    <p className="leading-relaxed text-muted-foreground">{description}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section id="experience" className="space-y-8 scroll-mt-28">
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-[0.24em] text-primary">
-                  Experience
-                </p>
-                <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
-                  Recent work shaped around modern frontend delivery
-                </h2>
-              </div>
-
-              <div className="space-y-6">
-                {experience.map((item) => (
-                  <article
-                    key={`${item.period}-${item.company}`}
-                    className="rounded-3xl border border-border/50 bg-surface/30 p-6 md:p-8"
-                  >
-                    <div className="mb-6 flex flex-col gap-4 border-b border-border/40 pb-6 md:flex-row md:items-start md:justify-between">
-                      <div>
-                        <p className="mb-2 flex items-center gap-2 text-primary">
-                          <BriefcaseBusiness className="h-4 w-4" />
-                          <span className="text-sm font-medium">{item.role}</span>
-                        </p>
-                        <h3 className="text-2xl font-semibold">{item.company}</h3>
+                {/* Visual card */}
+                <div className="relative min-h-80 rounded-3xl overflow-hidden bg-surface-secondary/30 border border-white/5 group">
+                  <div className="absolute inset-0 bg-linear-to-tr from-primary/20 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div
+                    className="absolute inset-0 opacity-[0.03]"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                      backgroundSize: "32px 32px",
+                    }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="w-40 h-40 rounded-full border border-white/10 flex items-center justify-center backdrop-blur-sm relative z-10">
+                        <Code2 className="h-16 w-16 text-white/60" />
                       </div>
-                      <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-                        {item.period}
+                      <div className="absolute inset-0 border border-dashed border-white/20 rounded-full animate-[spin_10s_linear_infinite]" />
+                      <div className="absolute -inset-4 border border-white/5 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6 bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                    <div className="flex items-center gap-3">
+                      <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse shrink-0" />
+                      <p className="text-xs font-mono uppercase tracking-widest text-white/70">
+                        Open to new opportunities
                       </p>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-                    <p className="mb-6 max-w-3xl leading-relaxed text-muted-foreground">
-                      {item.summary}
-                    </p>
+            {/* ── Experience ── */}
+            <section id="experience" className="resume-section scroll-mt-32">
+              <div className="flex items-center gap-4 mb-16">
+                <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase shrink-0">
+                  Career History
+                </h2>
+                <div className="h-px bg-border flex-1 max-w-50" />
+              </div>
 
-                    <ul className="space-y-3">
-                      {item.wins.map((win) => (
-                        <li key={win} className="flex gap-3 text-muted-foreground">
-                          <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                          <span>{win}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
+              <div className="relative border-l border-primary/10 ml-3 md:ml-0 space-y-20">
+                {experiences.map((exp, idx) => (
+                  <div key={idx} className="relative pl-8 md:pl-16 group">
+                    <div className="absolute -left-1 top-2 h-2 w-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-500 ring-4 ring-background" />
+                    <div className="absolute -left-px top-2 h-full w-0.5 bg-linear-to-b from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="grid md:grid-cols-[180px_1fr] gap-3 md:gap-10 items-start">
+                      <span className="font-mono text-sm text-muted-foreground uppercase tracking-wider py-1">
+                        {exp.period}
+                      </span>
+
+                      <div>
+                        <h3 className="text-2xl font-bold mb-1">{exp.company}</h3>
+                        <div className="text-primary text-base font-medium mb-6">
+                          {exp.role}
+                        </div>
+
+                        <p className="text-base text-muted-foreground leading-relaxed mb-6">
+                          {exp.description}
+                        </p>
+
+                        <ul className="space-y-3 mb-6">
+                          {exp.achievements.map((item, i) => (
+                            <li
+                              key={i}
+                              className="flex items-start gap-3 text-sm text-muted-foreground/80 group-hover:text-muted-foreground transition-colors"
+                            >
+                              <span className="h-1.5 w-1.5 rounded-full bg-primary/40 mt-1.5 shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className="text-xs px-3 py-1 rounded-full bg-surface-secondary border border-border/50 text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary cursor-default"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
 
-            <section id="toolkit" className="space-y-8 scroll-mt-28">
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-[0.24em] text-primary">
-                  Toolkit
-                </p>
-                <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
-                  Current technologies and recommended frontend patterns
+            {/* ── Skills ── */}
+            <section id="skills" className="resume-section scroll-mt-32">
+              <div className="flex items-center gap-4 mb-16">
+                <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase shrink-0">
+                  Technical Skills
                 </h2>
+                <div className="h-px bg-border flex-1 max-w-50" />
               </div>
 
-              <div className="grid gap-5 lg:grid-cols-3">
-                {toolkit.map(({ title, icon: Icon, items }) => (
-                  <article
-                    key={title}
-                    className="rounded-3xl border border-border/50 bg-surface/30 p-6"
-                  >
-                    <Icon className="mb-5 h-9 w-9 text-primary" />
-                    <h3 className="mb-5 text-2xl font-semibold">{title}</h3>
-                    <ul className="space-y-3">
-                      {items.map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-center gap-3 text-muted-foreground"
+              <div className="space-y-10">
+                {skillCategories.map((cat, idx) => (
+                  <div key={idx}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <cat.icon className="h-3.5 w-3.5 text-primary/60" />
+                      <h3 className="text-xs font-mono text-primary/60 uppercase tracking-widest">
+                        {cat.title}
+                      </h3>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {cat.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="text-sm font-medium px-4 py-2 rounded-full border border-border/60 bg-surface/40 text-foreground/80 hover:text-primary hover:border-primary/40 transition-colors cursor-default"
                         >
-                          <span className="h-2 w-2 rounded-full bg-primary/70" />
-                          <span>{item}</span>
-                        </li>
+                          {skill}
+                        </span>
                       ))}
-                    </ul>
-                  </article>
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
 
-            <section id="education" className="space-y-8 scroll-mt-28 pb-8">
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-[0.24em] text-primary">
+            {/* ── Education ── */}
+            <section id="education" className="resume-section scroll-mt-32">
+              <div className="flex items-center gap-4 mb-16">
+                <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase shrink-0">
                   Education
-                </p>
-                <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
-                  Continuous learning through shipping real work
                 </h2>
+                <div className="h-px bg-border flex-1 max-w-50" />
               </div>
 
-              <div className="grid gap-5 md:grid-cols-2">
-                {education.map((item) => (
-                  <article
-                    key={item.title}
-                    className="rounded-3xl border border-border/50 bg-surface/30 p-6"
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {education.map((edu, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative bg-white/2 border border-white/5 hover:border-primary/20 p-8 rounded-2xl transition-all duration-500 hover:bg-white/4"
                   >
-                    <GraduationCap className="mb-5 h-9 w-9 text-primary" />
-                    <h3 className="mb-3 text-2xl font-semibold">{item.title}</h3>
-                    <p className="leading-relaxed text-muted-foreground">{item.detail}</p>
-                  </article>
+                    <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+                      <ArrowUpRight className="w-6 h-6 text-primary" />
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <div>
+                          <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                            {edu.degree}
+                          </h3>
+                          <p className="text-base text-muted-foreground font-light mt-0.5">
+                            {edu.institution}
+                          </p>
+                        </div>
+                        <span className="font-mono text-sm text-primary tracking-widest uppercase shrink-0">
+                          {edu.period}
+                        </span>
+                      </div>
+
+                      <p className="text-sm text-muted-foreground/70 leading-relaxed border-l-2 border-white/5 pl-4 group-hover:border-primary/30 transition-colors duration-500">
+                        {edu.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        {edu.highlights.map((h, i) => (
+                          <span
+                            key={i}
+                            className="text-xs font-medium px-3 py-1 bg-white/5 border border-white/5 rounded text-muted-foreground group-hover:text-foreground group-hover:border-white/10 transition-all duration-500"
+                          >
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
-          </div>
+
+          </main>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

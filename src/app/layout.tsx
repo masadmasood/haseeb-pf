@@ -22,10 +22,10 @@ export const metadata: Metadata = {
   title: `${siteConfig.name} - ${siteConfig.title}`,
   description: siteConfig.description,
   keywords: [
-    "Frontend Engineer",
+    "Full Stack Developer",
     "React",
     "Next.js",
-    "Web Development",
+    "React Native",
     "TypeScript",
   ],
   authors: [{ name: siteConfig.name }],

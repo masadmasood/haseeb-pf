@@ -2,23 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Home, Briefcase, FileText, Mail, Handshake } from "lucide-react";
+import { Menu, X, Home, FileText, Mail, Handshake } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { projectsData } from "@/lib/projects-data";
 import { siteConfig } from "@/lib/site";
 
 const navigation = [
   { name: "Home", href: "/", icon: Home },
-  { name: "My Resume", href: "/about", icon: FileText },
+  { name: "Resume", href: "/about", icon: FileText },
   { name: "The Right Fit", href: "/services", icon: Handshake },
-  { name: "Contact Us", href: "/contact", icon: Mail },
+  { name: "Contact", href: "/contact", icon: Mail },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [showProjects, setShowProjects] = useState(false);
 
   return (
     <>
@@ -41,7 +39,7 @@ export function Navigation() {
               title={item.name}
             >
               <Icon className="h-[18px] w-[18px]" strokeWidth={isActive ? 2 : 1.5} />
-              
+
               {/* Animated Tooltip */}
               <span className="absolute right-full mr-3 flex items-center gap-2 px-3 py-2 rounded-full bg-foreground text-background text-xs font-medium opacity-0 scale-95 origin-right pointer-events-none transition-all duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 whitespace-nowrap">
                 <span>{item.name}</span>
@@ -51,69 +49,6 @@ export function Navigation() {
           );
         })}
 
-        {/* Work Dropdown Trigger */}
-        <div className="relative">
-          <button
-            onClick={() => setShowProjects(!showProjects)}
-            className={cn(
-              "group relative flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 ease-out",
-              "hover:scale-105",
-              showProjects || pathname.startsWith("/case-studies") || pathname === "/projects"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.06]"
-            )}
-            title="Work"
-          >
-            <Briefcase className="h-[18px] w-[18px]" strokeWidth={showProjects ? 2 : 1.5} />
-            
-            {/* Animated Tooltip */}
-            <span className="absolute right-full mr-3 flex items-center gap-2 px-3 py-2 rounded-full bg-foreground text-background text-xs font-medium opacity-0 scale-95 origin-right pointer-events-none transition-all duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 whitespace-nowrap">
-              <span>Work</span>
-              <span className="w-1 h-1 rounded-full bg-background/50"></span>
-            </span>
-          </button>
-
-          {/* Projects Dropdown / Flyout */}
-          {showProjects && (
-            <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 w-64 p-2 rounded-2xl bg-background/95 backdrop-blur-2xl border border-white/[0.08] shadow-2xl animate-in slide-in-from-right-4 fade-in duration-200">
-              <div className="flex max-h-[60vh] flex-col gap-1 overflow-y-auto">
-                <Link
-                    href="/projects"
-                    onClick={() => setShowProjects(false)}
-                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-colors group/item"
-                  >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary group-hover/item:bg-primary group-hover/item:text-primary-foreground transition-colors">
-                      <Briefcase className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">All Projects</p>
-                      <p className="text-[10px] text-muted-foreground">View full portfolio</p>
-                    </div>
-                </Link>
-                <div className="h-px bg-white/[0.08] my-1" />
-                {projectsData.map((project, idx) => (
-                  <Link
-                    key={project.href}
-                    href={project.href}
-                    onClick={() => setShowProjects(false)}
-                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-colors group/item"
-                  >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary group-hover/item:bg-primary group-hover/item:text-primary-foreground transition-colors">
-                       <span className="font-mono text-xs font-bold">{idx + 1}</span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground line-clamp-1">{project.title}</p>
-                      <p className="text-[10px] text-muted-foreground line-clamp-1">{project.category}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-        
-        {/* Minimal Divider */}
-        <div className="w-6 h-px bg-foreground/10 my-1" />
       </nav>
 
       {/* Mobile Header */}
@@ -140,7 +75,7 @@ export function Navigation() {
           <div className="fixed inset-0 bg-background/90 backdrop-blur-md" onClick={() => setIsOpen(false)} />
           <nav className="fixed top-14 left-0 right-0 bg-background/95 border-b border-border/40 max-h-[calc(100vh-3.5rem)] overflow-y-auto">
             <div className="container mx-auto px-6 py-8">
-              <div className="grid grid-cols-2 gap-3 mb-6">
+              <div className="grid grid-cols-2 gap-3">
                 {navigation.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname === item.href;
@@ -162,29 +97,6 @@ export function Navigation() {
                   );
                 })}
               </div>
-              
-              <div className="space-y-4">
-                <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground pl-1">Work</p>
-                <div className="grid gap-3">
-                  {projectsData.map((project, idx) => (
-                    <Link
-                      key={project.href}
-                      href={project.href}
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-4 p-4 rounded-xl bg-surface hover:bg-surface-secondary border border-transparent hover:border-border transition-colors group"
-                    >
-                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary font-mono text-sm font-bold group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        {idx + 1}
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{project.title}</p>
-                        <p className="text-xs text-muted-foreground">{project.category}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
             </div>
           </nav>
         </div>
@@ -192,4 +104,3 @@ export function Navigation() {
     </>
   );
 }
-

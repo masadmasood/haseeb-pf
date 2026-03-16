@@ -1,14 +1,16 @@
 export const siteConfig = {
-  name: "Asad Masood",
-  title: "Frontend Engineer",
+  name: "Haseeb Rasa",
+  title: "Full Stack Developer",
   description:
-    "Frontend engineer specializing in React, Next.js, TypeScript, and high-performance product interfaces.",
-  url: "https://asadmasood.dev",
-  email: "contact@asadmasood.dev",
+    "Full stack developer specializing in Next.js, React Native, TypeScript, Python, and AI-powered web and mobile applications.",
+  url: "https://haseeb.dev",
+  email: "haseeb@haseeb.dev",
   availability: "Available for remote projects worldwide.",
   location: "Remote worldwide",
+  discord: "nathan477",
   socials: {
-    github: "https://github.com/asadmasood",
-    linkedin: "https://linkedin.com/in/asadmasood",
+    github: "https://www.upwork.com",
+    linkedin: "https://www.fiverr.com",
+    peopleperhour: "https://www.peopleperhour.com",
   },
 } as const;
